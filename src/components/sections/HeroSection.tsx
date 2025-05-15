@@ -73,7 +73,7 @@ const HeroSection: React.FC = () => {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-black transition-all duration-300"
+                className="border-white text-white hover:bg-white/20 transition-all duration-300"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Neem Contact Op
