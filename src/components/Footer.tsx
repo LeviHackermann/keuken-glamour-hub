@@ -1,53 +1,113 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-black text-white">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-4">Keukenhelden</h3>
-            <p className="mb-4">Uw exclusieve keukenspecialist voor hoogwaardige, duurzame keukens in Nederland.</p>
-            <div className="flex items-center mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 py-16">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="md:col-span-5"
+          >
+            <NavLink to="/" className="inline-block mb-6">
               <img 
                 src="/lovable-uploads/aa1a87b3-d719-4400-8024-16b3db4b87df.png" 
                 alt="Keukenhelden Logo" 
                 className="h-12 bg-white p-1 rounded"
               />
+            </NavLink>
+            <h3 className="text-2xl font-bold mb-4">Keukenhelden</h3>
+            <p className="text-gray-400 mb-6 max-w-md">
+              Uw exclusieve keukenspecialist voor hoogwaardige, duurzame keukens in Nederland. Wij helpen u graag bij het realiseren van uw droomkeuken.
+            </p>
+            <div className="flex space-x-4">
+              {[Facebook, Instagram, Linkedin].map((Icon, index) => (
+                <a 
+                  key={index}
+                  href="#" 
+                  className="bg-gray-800 hover:bg-gray-700 transition-colors p-2 rounded-full"
+                  aria-label={`Social media link ${index + 1}`}
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              ))}
             </div>
-          </div>
+          </motion.div>
           
-          <div>
-            <h3 className="text-xl font-bold mb-4">Navigatie</h3>
-            <ul className="space-y-2">
-              <li><NavLink to="/#company" className="hover:text-gray-300">Over Ons</NavLink></li>
-              <li><NavLink to="/#showroom" className="hover:text-gray-300">Showroom</NavLink></li>
-              <li><NavLink to="/#contact" className="hover:text-gray-300">Contact</NavLink></li>
-              <li><NavLink to="/blog" className="hover:text-gray-300">Blog</NavLink></li>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="md:col-span-3"
+          >
+            <h3 className="text-xl font-bold mb-6">Navigatie</h3>
+            <ul className="space-y-3">
+              {[
+                { label: 'Over Ons', path: '/#company' },
+                { label: 'Showroom', path: '/#showroom' },
+                { label: 'Contact', path: '/#contact' },
+                { label: 'Blog', path: '/blog' }
+              ].map((item, index) => (
+                <li key={index}>
+                  <NavLink 
+                    to={item.path} 
+                    className="text-gray-400 hover:text-white transition-colors inline-block py-1"
+                  >
+                    {item.label}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
           
-          <div>
-            <h3 className="text-xl font-bold mb-4">Contact</h3>
-            <address className="not-italic">
-              <p className="mb-2">Keukenlaan 123</p>
-              <p className="mb-2">1234 AB Amsterdam</p>
-              <p className="mb-2">Nederland</p>
-              <p className="mb-2"><a href="tel:+31612345678" className="hover:text-gray-300">+31 6 12345678</a></p>
-              <p><a href="mailto:info@keukenhelden.nl" className="hover:text-gray-300">info@keukenhelden.nl</a></p>
-            </address>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="md:col-span-4"
+          >
+            <h3 className="text-xl font-bold mb-6">Contact</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start">
+                <MapPin className="h-5 w-5 text-gray-400 mt-1 mr-3" />
+                <address className="not-italic text-gray-400">
+                  <p>Keukenlaan 123</p>
+                  <p>1234 AB Amsterdam</p>
+                  <p>Nederland</p>
+                </address>
+              </li>
+              <li className="flex items-center">
+                <Phone className="h-5 w-5 text-gray-400 mr-3" />
+                <a href="tel:+31612345678" className="text-gray-400 hover:text-white transition-colors">
+                  +31 6 12345678
+                </a>
+              </li>
+              <li className="flex items-center">
+                <Mail className="h-5 w-5 text-gray-400 mr-3" />
+                <a href="mailto:info@keukenhelden.nl" className="text-gray-400 hover:text-white transition-colors">
+                  info@keukenhelden.nl
+                </a>
+              </li>
+            </ul>
+          </motion.div>
         </div>
         
-        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between">
-          <p>&copy; {currentYear} Keukenhelden. Alle rechten voorbehouden.</p>
-          <div className="mt-4 md:mt-0">
-            <NavLink to="/privacy-policy" className="hover:text-gray-300 mr-4">Privacy Policy</NavLink>
-            <NavLink to="/terms-of-service" className="hover:text-gray-300">Algemene Voorwaarden</NavLink>
+        <div className="border-t border-gray-800 py-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-500 mb-4 md:mb-0">&copy; {currentYear} Keukenhelden. Alle rechten voorbehouden.</p>
+          <div className="flex flex-wrap gap-4">
+            <NavLink to="/privacy-policy" className="text-gray-500 hover:text-white transition-colors">Privacy Policy</NavLink>
+            <NavLink to="/terms-of-service" className="text-gray-500 hover:text-white transition-colors">Algemene Voorwaarden</NavLink>
           </div>
         </div>
       </div>
