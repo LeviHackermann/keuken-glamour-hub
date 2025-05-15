@@ -29,16 +29,16 @@ const Navbar: React.FC = () => {
     )}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Replace logo with styled text */}
           <NavLink to="/" className="flex items-center">
-            <motion.img 
+            <motion.h1 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              src="/lovable-uploads/aa1a87b3-d719-4400-8024-16b3db4b87df.png" 
-              alt="Keukenhelden Logo" 
-              className="h-12"
-            />
+              className="text-2xl md:text-3xl font-serif font-bold tracking-wide text-gray-800"
+            >
+              <span className="bg-gradient-to-r from-purple-700 to-blue-500 text-transparent bg-clip-text">Keukenhelden</span>
+            </motion.h1>
           </NavLink>
 
           {/* Desktop Navigation */}
