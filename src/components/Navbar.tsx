@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
               transition={{ duration: 0.5 }}
               className="text-2xl md:text-3xl font-serif font-bold tracking-wide text-gray-800"
             >
-              <span className="bg-gradient-to-r from-purple-700 to-blue-500 text-transparent bg-clip-text">Keukenhelden</span>
+              <span className="bg-gradient-to-r from-gray-900 to-gray-500 text-transparent bg-clip-text">Keukenhelden</span>
             </motion.h1>
           </NavLink>
 
