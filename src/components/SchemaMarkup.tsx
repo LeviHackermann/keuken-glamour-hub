@@ -8,20 +8,19 @@ const SchemaMarkup: React.FC = () => {
     '@type': 'HomeGoodsStore',
     'name': 'Keukenhelden',
     'description': 'Uw exclusieve keukenspecialist voor hoogwaardige keukens in België',
-    'url': 'https://www.keukenhelden.nl',
-    'telephone': '+31612345678',
-    'email': 'info@keukenhelden.nl',
+    'url': 'https://www.dekeukenhelden.be',
+    'telephone': '+32 478 44 73 05',
+    'email': 'info@dekeukenhelden.be',
     'address': {
       '@type': 'PostalAddress',
-      'streetAddress': 'Keukenlaan 123',
-      'addressLocality': 'Amsterdam',
-      'postalCode': '1234 AB',
-      'addressCountry': 'NL'
+      'streetAddress': 'Vlaams-Brabant',
+      'addressLocality': 'Vlaams-Brabant',
+      'addressCountry': 'BE'
     },
     'geo': {
       '@type': 'GeoCoordinates',
-      'latitude': '52.3676',
-      'longitude': '4.9041'
+      'latitude': '50.8798',
+      'longitude': '4.7005'
     },
     'openingHoursSpecification': [
       {
@@ -47,11 +46,11 @@ const SchemaMarkup: React.FC = () => {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     'name': 'Keukenhelden',
-    'url': 'https://www.keukenhelden.nl',
-    'logo': 'https://www.keukenhelden.nl/logo.png',
+    'url': 'https://www.dekeukenhelden.be',
+    'logo': 'https://www.dekeukenhelden.be/logo.png',
     'contactPoint': {
       '@type': 'ContactPoint',
-      'telephone': '+31612345678',
+      'telephone': '+32 478 44 73 05',
       'contactType': 'customer service'
     }
   };

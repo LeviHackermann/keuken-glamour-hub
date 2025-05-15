@@ -25,21 +25,21 @@ const ContactSection: React.FC = () => {
     {
       icon: <MapPin className="h-8 w-8" />,
       title: "Adres",
-      content: ["Keukenlaan 123", "1234 AB Amsterdam", "Nederland"],
+      content: ["Vlaams-Brabant", "Belgium"],
       color: "bg-gradient-to-br from-gray-800 to-gray-900"
     },
     {
       icon: <Phone className="h-8 w-8" />,
       title: "Telefoon",
-      content: ["+31 6 12345678"],
-      link: "tel:+31612345678",
+      content: ["+32 478 44 73 05"],
+      link: "tel:+32478447305",
       color: "bg-gradient-to-br from-gray-700 to-gray-800"
     },
     {
       icon: <Mail className="h-8 w-8" />,
       title: "E-mail",
-      content: ["info@keukenhelden.nl"],
-      link: "mailto:info@keukenhelden.nl",
+      content: ["info@dekeukenhelden.be"],
+      link: "mailto:info@dekeukenhelden.be",
       color: "bg-gradient-to-br from-gray-900 to-black"
     },
     {

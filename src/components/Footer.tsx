@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
             </NavLink>
             <h3 className="text-2xl font-bold mb-4">Keukenhelden</h3>
             <p className="text-gray-400 mb-6 max-w-md">
-              Uw exclusieve keukenspecialist voor hoogwaardige, duurzame keukens in Nederland. Wij helpen u graag bij het realiseren van uw droomkeuken.
+              Uw exclusieve keukenspecialist voor hoogwaardige, duurzame keukens in België. Wij helpen u graag bij het realiseren van uw droomkeuken.
             </p>
             <div className="flex space-x-4">
               {[Facebook, Instagram, Linkedin].map((Icon, index) => (
@@ -82,21 +82,20 @@ const Footer: React.FC = () => {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-gray-400 mt-1 mr-3" />
                 <address className="not-italic text-gray-400">
-                  <p>Keukenlaan 123</p>
-                  <p>1234 AB Amsterdam</p>
-                  <p>Nederland</p>
+                  <p>Vlaams-Brabant</p>
+                  <p>Belgium</p>
                 </address>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 text-gray-400 mr-3" />
-                <a href="tel:+31612345678" className="text-gray-400 hover:text-white transition-colors">
-                  +31 6 12345678
+                <a href="tel:+32478447305" className="text-gray-400 hover:text-white transition-colors">
+                  +32 478 44 73 05
                 </a>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 text-gray-400 mr-3" />
-                <a href="mailto:info@keukenhelden.nl" className="text-gray-400 hover:text-white transition-colors">
-                  info@keukenhelden.nl
+                <a href="mailto:info@dekeukenhelden.be" className="text-gray-400 hover:text-white transition-colors">
+                  info@dekeukenhelden.be
                 </a>
               </li>
             </ul>

@@ -32,12 +32,12 @@ const Index: React.FC = () => {
         <meta name="description" content="Bij Keukenhelden vindt u hoogwaardige keukens in diverse kleuren en materialen, perfect afgestemd op uw wensen en interieur. Belgisch keukenassortiment van hoge kwaliteit." />
         <meta name="keywords" content="keukens, keuken, keukenhelden, duurzame keukens, CO2-neutraal, ECO keukens, Belgische keukens" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.keukenhelden.nl" />
+        <link rel="canonical" href="https://www.dekeukenhelden.be" />
         <meta property="og:title" content="Keukenhelden - Uw Exclusieve Keukenspecialist" />
         <meta property="og:description" content="Bij Keukenhelden vindt u hoogwaardige keukens in diverse kleuren en materialen, perfect afgestemd op uw wensen en interieur." />
-        <meta property="og:url" content="https://www.keukenhelden.nl" />
+        <meta property="og:url" content="https://www.dekeukenhelden.be" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://www.keukenhelden.nl/og-image.jpg" />
+        <meta property="og:image" content="https://www.dekeukenhelden.be/og-image.jpg" />
       </Helmet>
 
       <div className="pt-16">
