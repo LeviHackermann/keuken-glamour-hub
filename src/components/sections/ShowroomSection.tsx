@@ -10,8 +10,17 @@ import {
 } from "@/components/ui/carousel";
 
 const ShowroomSection: React.FC = () => {
-  // Sample kitchen images - replace with actual kitchen images
-  const kitchenImages = Array(12).fill('/placeholder.svg');
+  // Real kitchen images uploaded by user
+  const kitchenImages = [
+    '/lovable-uploads/b12a794c-a45e-4fa6-87c5-a09f4bd81810.png',
+    '/lovable-uploads/0b5af362-6551-4ca5-8ff1-206b4f1cee89.png',
+    '/lovable-uploads/22aef2cd-ac39-470e-8651-7d80ea0c3293.png',
+    '/lovable-uploads/c25ef9c8-e9cb-4eb2-b560-d0de37645867.png',
+    '/lovable-uploads/e46e289a-2386-4184-90c1-032a26db3a10.png',
+    '/lovable-uploads/5dc17629-1633-467f-90e1-30a5a72af533.png',
+    '/lovable-uploads/f3d28e67-33f2-4b77-ad3e-1ecdec84070e.png',
+    '/lovable-uploads/b7f2be2c-ff1c-4e0f-8298-3497eea2fd45.png',
+  ];
 
   return (
     <div className="container mx-auto px-4">
@@ -34,7 +43,7 @@ const ShowroomSection: React.FC = () => {
             <CarouselContent>
               {kitchenImages.map((src, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="relative pb-[100%] rounded-lg overflow-hidden">
+                  <div className="relative pb-[75%] rounded-lg overflow-hidden">
                     <img 
                       src={src}
                       alt={`Keuken voorbeeld ${index + 1}`} 
