@@ -21,6 +21,28 @@ const AddBlogPostModal: React.FC<AddBlogPostModalProps> = ({ isOpen, onClose }) 
   const [coverImage, setCoverImage] = useState('');
   const [tags, setTags] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Admin authentication states
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [adminPassword, setAdminPassword] = useState('');
+  
+  const ADMIN_PASSWORD = 'keukenhelden2025'; // In a real app, this would be server-side authenticated
+
+  const handleAuthentication = () => {
+    if (adminPassword === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      toast({
+        title: "Verificatie geslaagd",
+        description: "U bent nu ingelogd als beheerder.",
+      });
+    } else {
+      toast({
+        title: "Verificatie mislukt",
+        description: "Het ingevoerde wachtwoord is onjuist.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,71 +98,96 @@ const AddBlogPostModal: React.FC<AddBlogPostModalProps> = ({ isOpen, onClose }) 
         <DialogHeader>
           <DialogTitle>Nieuwe Blog Post</DialogTitle>
           <DialogDescription>
-            Vul de velden in om een nieuwe blog post toe te voegen.
+            {isAuthenticated 
+              ? "Vul de velden in om een nieuwe blog post toe te voegen."
+              : "Alleen de beheerder kan nieuwe blog posts toevoegen. Voer het beheerderswachtwoord in om door te gaan."}
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="title">Titel</Label>
-            <Input 
-              id="title" 
-              value={title} 
-              onChange={(e) => setTitle(e.target.value)} 
-              required 
-            />
-          </div>
+        {!isAuthenticated ? (
+          <form onSubmit={(e) => { e.preventDefault(); handleAuthentication(); }} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="adminPassword">Beheerderswachtwoord</Label>
+              <Input 
+                id="adminPassword" 
+                type="password"
+                value={adminPassword} 
+                onChange={(e) => setAdminPassword(e.target.value)} 
+                required 
+              />
+            </div>
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={onClose}>
+                Annuleren
+              </Button>
+              <Button type="submit">
+                Verifiëren
+              </Button>
+            </DialogFooter>
+          </form>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="title">Titel</Label>
+              <Input 
+                id="title" 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)} 
+                required 
+              />
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="excerpt">Samenvatting</Label>
-            <Textarea 
-              id="excerpt" 
-              value={excerpt} 
-              onChange={(e) => setExcerpt(e.target.value)} 
-              required 
-            />
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="excerpt">Samenvatting</Label>
+              <Textarea 
+                id="excerpt" 
+                value={excerpt} 
+                onChange={(e) => setExcerpt(e.target.value)} 
+                required 
+              />
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="content">Inhoud</Label>
-            <Textarea 
-              id="content" 
-              value={content} 
-              onChange={(e) => setContent(e.target.value)} 
-              rows={8}
-              required 
-            />
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="content">Inhoud</Label>
+              <Textarea 
+                id="content" 
+                value={content} 
+                onChange={(e) => setContent(e.target.value)} 
+                rows={8}
+                required 
+              />
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="coverImage">Afbeelding URL</Label>
-            <Input 
-              id="coverImage" 
-              value={coverImage} 
-              onChange={(e) => setCoverImage(e.target.value)} 
-              placeholder="https://example.com/image.jpg" 
-            />
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="coverImage">Afbeelding URL</Label>
+              <Input 
+                id="coverImage" 
+                value={coverImage} 
+                onChange={(e) => setCoverImage(e.target.value)} 
+                placeholder="https://example.com/image.jpg" 
+              />
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="tags">Tags (gescheiden door komma's)</Label>
-            <Input 
-              id="tags" 
-              value={tags} 
-              onChange={(e) => setTags(e.target.value)} 
-              placeholder="inspiratie, tips, trends" 
-            />
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="tags">Tags (gescheiden door komma's)</Label>
+              <Input 
+                id="tags" 
+                value={tags} 
+                onChange={(e) => setTags(e.target.value)} 
+                placeholder="inspiratie, tips, trends" 
+              />
+            </div>
 
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={onClose}>
-              Annuleren
-            </Button>
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Toevoegen..." : "Blog Post Toevoegen"}
-            </Button>
-          </DialogFooter>
-        </form>
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={onClose}>
+                Annuleren
+              </Button>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Toevoegen..." : "Blog Post Toevoegen"}
+              </Button>
+            </DialogFooter>
+          </form>
+        )}
       </DialogContent>
     </Dialog>
   );
