@@ -55,7 +55,7 @@ const HeroSection: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.9 }}
               className="text-lg mb-8 text-white/80"
             >
-              Bij Keukenhelden zijn we trots om u hoogwaardige keukens aan te bieden. Als geautoriseerde retailer kunnen wij u voorzien van een uitgebreid Nederlands keukenassortiment in diverse kleuren en materialen.
+              Bij Keukenhelden zijn we trots om u hoogwaardige keukens aan te bieden. Wij kunnen u voorzien van een uitgebreid Belgisch keukenassortiment in diverse kleuren en materialen, perfect afgestemd op uw wensen en interieur.
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 20 }}

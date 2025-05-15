@@ -29,8 +29,8 @@ const Index: React.FC = () => {
     <>
       <Helmet>
         <title>Keukenhelden - Uw Exclusieve Keukenspecialist</title>
-        <meta name="description" content="Bij Keukenhelden vindt u hoogwaardige keukens in diverse kleuren en materialen, perfect afgestemd op uw wensen en interieur. Geautoriseerde retailer van Keukenhelden." />
-        <meta name="keywords" content="keukens, keuken, keukenhelden, duurzame keukens, CO2-neutraal, ECO keukens, Nederlandse keukens" />
+        <meta name="description" content="Bij Keukenhelden vindt u hoogwaardige keukens in diverse kleuren en materialen, perfect afgestemd op uw wensen en interieur. Belgisch keukenassortiment van hoge kwaliteit." />
+        <meta name="keywords" content="keukens, keuken, keukenhelden, duurzame keukens, CO2-neutraal, ECO keukens, Belgische keukens" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://www.keukenhelden.nl" />
         <meta property="og:title" content="Keukenhelden - Uw Exclusieve Keukenspecialist" />

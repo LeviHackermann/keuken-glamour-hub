@@ -66,7 +66,7 @@ const EcoSection: React.FC = () => {
             className="space-y-6"
           >
             <p className="text-lg">
-              Keukenhelden loopt voorop in duurzame innovatie met hun exclusieve lijn eco gerecyclede keukens. Deze revolutionaire keukens worden vervaardigd uit hoogwaardig gerecycled materiaal, waardoor de ecologische voetafdruk aanzienlijk wordt verkleind.
+              Keukenhelden loopt voorop in duurzame innovatie met onze exclusieve lijn eco gerecyclede keukens. Deze revolutionaire keukens worden vervaardigd uit hoogwaardig gerecycled materiaal, waardoor de ecologische voetafdruk aanzienlijk wordt verkleind.
             </p>
             
             <p className="text-lg">

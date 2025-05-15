@@ -7,7 +7,7 @@ const SchemaMarkup: React.FC = () => {
     '@context': 'https://schema.org',
     '@type': 'HomeGoodsStore',
     'name': 'Keukenhelden',
-    'description': 'Uw exclusieve keukenspecialist voor hoogwaardige keukens in Nederland',
+    'description': 'Uw exclusieve keukenspecialist voor hoogwaardige keukens in België',
     'url': 'https://www.keukenhelden.nl',
     'telephone': '+31612345678',
     'email': 'info@keukenhelden.nl',

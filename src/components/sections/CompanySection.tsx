@@ -13,7 +13,7 @@ const CompanySection: React.FC = () => {
         className="max-w-6xl mx-auto"
       >
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 text-center">
-          Waarom kiezen voor onze keukens van Keukenhelden?
+          Waarom kiezen voor onze keukens?
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -25,12 +25,12 @@ const CompanySection: React.FC = () => {
             className="prose max-w-none"
           >
             <p className="text-lg mb-6 text-gray-700">
-              Bij Keukenhelden zijn we trots om u hoogwaardige keukens aan te bieden. Als geautoriseerde retailer kunnen wij u voorzien van een uitgebreid Nederlands keukenassortiment in diverse kleuren en materialen, perfect afgestemd op uw wensen en interieur.
+              Bij Keukenhelden zijn we trots om u hoogwaardige keukens aan te bieden. Wij kunnen u voorzien van een uitgebreid Belgisch keukenassortiment in diverse kleuren en materialen, perfect afgestemd op uw wensen en interieur.
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                "Uitgebreid Nederlands assortiment",
+                "Uitgebreid Belgisch assortiment",
                 "Levertijd vanaf slechts 10 werkdagen",
                 "Luxe Blum laden & korven met demping",
                 "Laserafkanting op alle fronten",

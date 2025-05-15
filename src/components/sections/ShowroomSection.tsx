@@ -51,6 +51,22 @@ const ShowroomSection: React.FC = () => {
           </Carousel>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="bg-gray-50 p-6 rounded-xl">
+            <h3 className="text-2xl font-bold mb-4">Keuken én bijkeuken</h3>
+            <p className="text-gray-700">
+              Naast prachtige keukens bieden wij ook complete bijkeukenopstellingen aan. Een praktische bijkeuken vormt de ideale aanvulling op uw keuken en biedt extra opbergruimte en functionaliteit.
+            </p>
+          </div>
+          
+          <div className="bg-gray-50 p-6 rounded-xl">
+            <h3 className="text-2xl font-bold mb-4">Techniek & Montagegemak</h3>
+            <p className="text-gray-700">
+              De kwaliteit van een keuken van Keukenhelden uit zich niet alleen in duurzaamheid en afwerking, maar ook in het montagegemak. Een echte kwaliteitskeuken komt ook moeiteloos in elkaar. De montagehandleidingen zijn beschikbaar in het Nederlands, Engels en Frans. Wij komen de keuken gratis monteren indien u dat wenst.
+            </p>
+          </div>
+        </div>
+
         <div className="text-center">
           <Button 
             size="lg" 
