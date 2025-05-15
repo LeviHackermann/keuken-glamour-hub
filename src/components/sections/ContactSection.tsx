@@ -1,24 +1,63 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
-import { useToast } from '@/components/ui/use-toast';
+import { MapPin, Phone, Mail, Clock, Loader2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const ContactSection: React.FC = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [formSuccess, setFormSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // In a real implementation, you would send the form data to a server
-    toast({
-      title: "Bericht verzonden",
-      description: "Wij nemen zo spoedig mogelijk contact met u op.",
-    });
+    setIsSubmitting(true);
+    setFormError(null);
+    
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    // Replace this URL with your actual Formspree form ID
+    // e.g., https://formspree.io/f/your-form-id
+    const formspreeUrl = "https://formspree.io/f/your-form-id";
+    
+    try {
+      const response = await fetch(formspreeUrl, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      
+      if (response.ok) {
+        setFormSuccess(true);
+        form.reset();
+        toast({
+          title: "Bericht verzonden",
+          description: "Wij nemen zo spoedig mogelijk contact met u op.",
+        });
+      } else {
+        const data = await response.json();
+        throw new Error(data.error || "Er is iets misgegaan bij het verzenden van het formulier.");
+      }
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : "Er is iets misgegaan bij het verzenden van het formulier.");
+      toast({
+        title: "Fout",
+        description: "Er is iets misgegaan bij het verzenden van het formulier.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactCards = [
@@ -87,36 +126,63 @@ const ContactSection: React.FC = () => {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-bold mb-6">Stuur ons een bericht</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Naam</Label>
-                  <Input id="name" name="name" placeholder="Uw naam" required 
-                    className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">E-mail</Label>
-                  <Input id="email" name="email" type="email" placeholder="uw@email.nl" required 
-                    className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone">Telefoonnummer</Label>
-                <Input id="phone" name="phone" placeholder="Uw telefoonnummer" 
-                  className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="message">Bericht</Label>
-                <Textarea id="message" name="message" placeholder="Uw vraag of opmerking" rows={5} required 
-                  className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
-              </div>
-              <Button 
-                type="submit" 
-                className="w-full bg-black hover:bg-gray-800 text-white transition-all duration-300"
-              >
-                Verzenden
-              </Button>
-            </form>
+            
+            {formSuccess ? (
+              <Alert className="bg-green-50 border-green-200 mb-6">
+                <AlertDescription className="text-green-800">
+                  Uw bericht is succesvol verzonden. Wij nemen zo spoedig mogelijk contact met u op.
+                </AlertDescription>
+              </Alert>
+            ) : (
+              <>
+                {formError && (
+                  <Alert className="bg-red-50 border-red-200 mb-6">
+                    <AlertDescription className="text-red-800">
+                      {formError}
+                    </AlertDescription>
+                  </Alert>
+                )}
+                
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Naam</Label>
+                      <Input id="name" name="name" placeholder="Uw naam" required 
+                        className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">E-mail</Label>
+                      <Input id="email" name="email" type="email" placeholder="uw@email.nl" required 
+                        className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Telefoonnummer</Label>
+                    <Input id="phone" name="phone" placeholder="Uw telefoonnummer" 
+                      className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Bericht</Label>
+                    <Textarea id="message" name="message" placeholder="Uw vraag of opmerking" rows={5} required 
+                      className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-black hover:bg-gray-800 text-white transition-all duration-300"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Verzenden...
+                      </>
+                    ) : (
+                      "Verzenden"
+                    )}
+                  </Button>
+                </form>
+              </>
+            )}
           </motion.div>
 
           <motion.div
