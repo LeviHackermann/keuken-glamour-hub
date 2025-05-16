@@ -1,14 +1,18 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { useBlogPost } from '@/hooks/useBlogPost';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Pencil } from 'lucide-react';
+import EditBlogPostModal from '@/components/blog/EditBlogPostModal';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
 
 const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { post, isLoading, error } = useBlogPost(slug || '');
+  const { updatePost } = useBlogPosts();
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -86,11 +90,19 @@ const BlogPost: React.FC = () => {
 
       <div className="container mx-auto px-4 py-16 mt-8">
         <div className="max-w-3xl mx-auto">
-          <div className="mb-8">
+          <div className="mb-8 flex justify-between items-center">
             <Link to="/blog" className="inline-flex items-center text-gray-600 hover:text-black">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Terug naar Blog
             </Link>
+            <Button 
+              variant="outline" 
+              className="flex items-center gap-1"
+              onClick={() => setIsEditModalOpen(true)}
+            >
+              <Pencil className="h-4 w-4" />
+              Bewerken
+            </Button>
           </div>
 
           <div className="mb-6">
@@ -135,6 +147,13 @@ const BlogPost: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <EditBlogPostModal 
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        post={post}
+        onUpdate={updatePost}
+      />
     </>
   );
 };

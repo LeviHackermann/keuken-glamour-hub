@@ -85,5 +85,39 @@ export function useBlogPosts() {
     fetchPosts();
   }, []);
 
-  return { posts, isLoading, error };
+  // Add deletePost function
+  const deletePost = (id: string) => {
+    try {
+      const updatedPosts = posts.filter(post => post.id !== id);
+      localStorage.setItem('blogPosts', JSON.stringify(updatedPosts));
+      setPosts(updatedPosts);
+      return true;
+    } catch (err) {
+      console.error('Error deleting blog post:', err);
+      return false;
+    }
+  };
+
+  // Add updatePost function
+  const updatePost = (updatedPost: BlogPost) => {
+    try {
+      const postIndex = posts.findIndex(post => post.id === updatedPost.id);
+      
+      if (postIndex === -1) {
+        return false;
+      }
+
+      const updatedPosts = [...posts];
+      updatedPosts[postIndex] = updatedPost;
+      
+      localStorage.setItem('blogPosts', JSON.stringify(updatedPosts));
+      setPosts(updatedPosts);
+      return true;
+    } catch (err) {
+      console.error('Error updating blog post:', err);
+      return false;
+    }
+  };
+
+  return { posts, isLoading, error, deletePost, updatePost };
 }
