@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -6,6 +5,25 @@ import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin } from 'lucide-react
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  
+  // Social media URLs
+  const socialLinks = [
+    { 
+      Icon: Facebook, 
+      url: "https://www.facebook.com/dekeukenhelden",
+      label: "Facebook" 
+    },
+    { 
+      Icon: Instagram, 
+      url: "https://www.instagram.com/dekeukenhelden",
+      label: "Instagram" 
+    },
+    { 
+      Icon: Linkedin, 
+      url: "https://www.linkedin.com/company/dekeukenhelden",
+      label: "LinkedIn" 
+    }
+  ];
   
   return (
     <footer className="bg-black text-white">
@@ -30,14 +48,16 @@ const Footer: React.FC = () => {
               Uw exclusieve keukenspecialist voor hoogwaardige, duurzame keukens in België. Wij helpen u graag bij het realiseren van uw droomkeuken.
             </p>
             <div className="flex space-x-4">
-              {[Facebook, Instagram, Linkedin].map((Icon, index) => (
+              {socialLinks.map((social, index) => (
                 <a 
                   key={index}
-                  href="#" 
+                  href={social.url} 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-gray-800 hover:bg-gray-700 transition-colors p-2 rounded-full"
-                  aria-label={`Social media link ${index + 1}`}
+                  aria-label={social.label}
                 >
-                  <Icon className="h-5 w-5" />
+                  <social.Icon className="h-5 w-5" />
                 </a>
               ))}
             </div>
