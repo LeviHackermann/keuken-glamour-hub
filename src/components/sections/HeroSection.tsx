@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const HeroSection: React.FC = () => {
@@ -66,9 +66,11 @@ const HeroSection: React.FC = () => {
               <Button 
                 size="lg" 
                 className="bg-white hover:bg-gray-100 text-black transition-all duration-300 hover:scale-105"
-                onClick={() => document.getElementById('showroom')?.scrollIntoView({ behavior: 'smooth' })}
+                asChild
               >
-                Bekijk Onze Showroom <ArrowRight className="ml-2 h-4 w-4" />
+                <a href="/path-to-your-brochure.pdf" download="Keukenhelden-Brochure.pdf">
+                  Download Onze Brochure <Download className="ml-2 h-4 w-4" />
+                </a>
               </Button>
               <Button 
                 size="lg" 
