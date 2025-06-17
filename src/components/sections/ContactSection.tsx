@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import { MapPin, Phone, Mail, Clock, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
@@ -14,14 +15,27 @@ const ContactSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState(false);
+  const [gdprConsent, setGdprConsent] = useState(false);
+  const [marketingConsent, setMarketingConsent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setFormError(null);
     
+    if (!gdprConsent) {
+      setFormError("U moet akkoord gaan met de verwerking van uw gegevens om het formulier te verzenden.");
+      setIsSubmitting(false);
+      return;
+    }
+    
     const form = e.currentTarget;
     const formData = new FormData(form);
+    
+    // Add consent information to form data
+    formData.append('gdpr_consent', gdprConsent.toString());
+    formData.append('marketing_consent', marketingConsent.toString());
+    formData.append('consent_timestamp', new Date().toISOString());
     
     // Using the provided Formspree form ID
     const formspreeUrl = "https://formspree.io/f/xldbaqaj";
@@ -38,6 +52,8 @@ const ContactSection: React.FC = () => {
       if (response.ok) {
         setFormSuccess(true);
         form.reset();
+        setGdprConsent(false);
+        setMarketingConsent(false);
         toast({
           title: "Bericht verzonden",
           description: "Wij nemen zo spoedig mogelijk contact met u op.",
@@ -140,16 +156,29 @@ const ContactSection: React.FC = () => {
                     </AlertDescription>
                   </Alert>
                 )}
+
+                {/* GDPR Information Box */}
+                <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-6">
+                  <h4 className="font-semibold text-blue-900 mb-2">Privacy en gegevensbescherming</h4>
+                  <p className="text-sm text-blue-800 mb-2">
+                    Wij respecteren uw privacy en verwerken uw persoonlijke gegevens in overeenstemming met de AVG/GDPR. 
+                    Uw gegevens worden uitsluitend gebruikt om contact met u op te nemen over uw aanvraag.
+                  </p>
+                  <p className="text-sm text-blue-800">
+                    Voor meer informatie over hoe wij uw gegevens verwerken, zie onze{' '}
+                    <a href="/privacy-policy" className="underline font-medium">privacyverklaring</a>.
+                  </p>
+                </div>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Naam</Label>
+                      <Label htmlFor="name">Naam *</Label>
                       <Input id="name" name="name" placeholder="Uw naam" required 
                         className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">E-mail</Label>
+                      <Label htmlFor="email">E-mail *</Label>
                       <Input id="email" name="email" type="email" placeholder="uw@email.nl" required 
                         className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
                     </div>
@@ -160,14 +189,50 @@ const ContactSection: React.FC = () => {
                       className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="message">Bericht</Label>
+                    <Label htmlFor="message">Bericht *</Label>
                     <Textarea id="message" name="message" placeholder="Uw vraag of opmerking" rows={5} required 
                       className="border-gray-300 focus:border-black focus:ring-black transition-colors" />
                   </div>
+
+                  {/* GDPR Consent Checkboxes */}
+                  <div className="space-y-4 border-t pt-4">
+                    <div className="flex items-start space-x-3">
+                      <Checkbox 
+                        id="gdpr-consent" 
+                        checked={gdprConsent}
+                        onCheckedChange={(checked) => setGdprConsent(checked as boolean)}
+                        className="mt-1"
+                      />
+                      <Label htmlFor="gdpr-consent" className="text-sm leading-relaxed">
+                        Ik ga akkoord met de verwerking van mijn persoonlijke gegevens door Keukenhelden 
+                        voor het beantwoorden van mijn aanvraag, conform de{' '}
+                        <a href="/privacy-policy" className="text-blue-600 underline">privacyverklaring</a>. *
+                      </Label>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <Checkbox 
+                        id="marketing-consent" 
+                        checked={marketingConsent}
+                        onCheckedChange={(checked) => setMarketingConsent(checked as boolean)}
+                        className="mt-1"
+                      />
+                      <Label htmlFor="marketing-consent" className="text-sm leading-relaxed">
+                        Ik wil graag op de hoogte gehouden worden van nieuwe producten, aanbiedingen en nieuws van Keukenhelden 
+                        (optioneel - u kunt zich altijd uitschrijven).
+                      </Label>
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-gray-600">
+                    * Verplichte velden. U heeft het recht om uw gegevens in te zien, te wijzigen of te verwijderen. 
+                    Neem hiervoor contact met ons op via info@dekeukenhelden.be.
+                  </p>
+
                   <Button 
                     type="submit" 
                     className="w-full bg-black hover:bg-gray-800 text-white transition-all duration-300"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !gdprConsent}
                   >
                     {isSubmitting ? (
                       <>
