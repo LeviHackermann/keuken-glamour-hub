@@ -68,7 +68,11 @@ const HeroSection: React.FC = () => {
                 className="bg-white hover:bg-gray-100 text-black transition-all duration-300 hover:scale-105"
                 asChild
               >
-                <a href="/path-to-your-brochure.pdf" download="Keukenhelden-Brochure.pdf">
+                <a 
+                  href="https://www.dropbox.com/scl/fi/4b0bgwpdi2dqb8pp1fxz3/keukenhelden_pdf_optimized_catalog.pdf?rlkey=bad31osjpusv85n4iuaide4kc&st=boofxxsx&dl=1" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Download Onze Brochure <Download className="ml-2 h-4 w-4" />
                 </a>
               </Button>
